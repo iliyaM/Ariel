@@ -1,0 +1,114 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 1em;
+    background-color: #a7a9ac;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    z-index: 1;
+
+    a.logo {
+        text-decoration: none;
+        img {
+            display: block;
+            width: 50%;
+        }
+    }
+    border-bottom: 1px solid grey;
+    
+}
+
+
+div.options_container {
+    select {
+        padding: 0.5em;
+    }
+
+    input.fileUploader {
+        padding: 1em;
+    }
+}
+
+
+div#map {
+    height: 100%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+.custom-file-upload[_ngcontent-c0] {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background: tomato;
+    color: white;
+}
+
+// Info Box
+div.infoBox {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30%;
+    height: 200px;
+    background-color: white;
+
+    border-top-right-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    box-shadow: 4px -2px 12px rgba(0,0,0,0.3);
+
+   
+}
+
+
+ul {
+    list-style: none;
+
+    li {
+        padding-bottom: 0.5em;
+        font-size: 1.2em;
+    }
+}
+
+
+
+// Ledend
+div.legend {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 1em;
+    box-shadow: 3px 1px 16px rgba(0, 0, 0, 0.4);
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            span {
+                height: 25px;
+            }
+            span:first-of-type {
+                margin-right: 50px;
+            }
+        }
+    }
+}

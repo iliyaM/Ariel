@@ -1,0 +1,56 @@
+<header>
+	<!-- Logo image -->
+	<a href="https://www.mprest.com/" class="logo">
+		<img src="../assets/mprest-logo.png" alt="Mprest-logo">
+	</a>
+	<!-- Container with file upload and select box -->
+	<div class="options_container">
+		<label for="file-upload" class="custom-file-upload">
+			Custom Upload
+		</label>
+		<input id="file-upload" type="file" (change)='fileChange($event.target.files)' placeholder='Upload topology' accept='.pdf,.doc,.csv'
+		 onclick='this.value = null' />
+
+
+
+
+		<input class="fileUploader" type='file' (change)='fileChange($event.target.files)' placeholder='Upload file' accept='.pdf,.doc,.csv'
+		 onclick='this.value = null' />
+
+		<select (change)="selectedFilter($event.target.value)">
+			<option value="conductor_material" selected>Conductor Material</option>
+			<option value="conductor_type">Conductor Type</option>
+			<option value="insulation_type">Insulation Type</option>
+			<option value="operational_age">Operational Age</option>
+			<option value="failure_hazrad">Failure Hazrad</option>
+		</select>
+	</div>
+</header>
+
+
+<div id="map">
+	<agm-map style="height: 100%" [latitude]="32.7157" [longitude]="-117.1611" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+
+		<agm-circle *ngFor="let circleMarker of markers" [latitude]="circleMarker.lat" [longitude]="circleMarker.lng" [radius]="200"
+		 [fillColor]="circleMarker.color" (circleClick)="clickedMarker(circleMarker)">
+		</agm-circle>
+	</agm-map>
+</div>
+
+<div class="infoBox" *ngIf="markerInfo">
+	<ul>
+		<li>Upstream Structure ID: {{ markerInfo.upstream_structure_id }}</li>
+		<li>Downstream Structure ID: {{ markerInfo.downstream_structure_id }}</li>
+		<li>Feeder ID: {{ markerInfo.feeder_id }}</li>
+		<li>Measured Length: {{ markerInfo.measureLength }} KM</li>
+	</ul>
+</div>
+
+<div class="legend" *ngIf="legend">
+	<ul>
+		<li *ngFor="let color of legend | keyValue" >
+			<span>{{color.key}}:</span>
+			<span [style.background]="color.value" class="legent_item" style="width: 100px;"></span>
+		</li>
+	</ul>
+</div>
