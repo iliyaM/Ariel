@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
 		this.lineService.lengedArray$.subscribe(response => {
 			this.legend = response;
 		});
-	
 	}
 
 	selectedFilter(value) {
@@ -49,6 +48,7 @@ export class AppComponent implements OnInit {
 
 
 	fileChange(file) {
+		console.log(file);
 		this.lineService.readFile(file);
 	}
 

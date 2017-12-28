@@ -56,9 +56,13 @@ export class LineService {
     constructor(private papaService: PapaParseService) { }
 
     readFile(files) {
-        this.papaService.parse(files[0], {
+      this.papaService.parse(files[0], {
             complete: ({ data }) => {
+                console.log('Papa completed');
                 this.constructObjectsForRender(data);
+            },
+            error: (error) => {
+                console.log(error);
             }
         });
     }
