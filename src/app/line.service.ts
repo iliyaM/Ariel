@@ -39,6 +39,12 @@ export class LineService {
         XLPECNAL: '#CDCDCF'
     };
 
+    CONTINUES_TYPE_MAP = {
+        Excelent: 'green',
+        Good: 'yellow',
+        Bad: 'red',
+    };
+
     ISULATION_TYPE_MAP = {
         Polyethylene: 'yellow',
         Crosslinkedpolyethylene: 'purple',
@@ -99,7 +105,7 @@ export class LineService {
         const marker: MarkerObject = {
             lat: Number(),
             lng: Number(),
-            color: this.getGreenToRed(Number(item.OPERATIONALAGE)),
+            color: this.getGreenToRed(Number(item.OPERATIONALAGE), this.markersArray.length),
             conductor_material: item.CONDUCTORMATERIAL,
             conductor_type: item.CONDUCTORTYPE,
             insulation_type: item.INSULATIONTYPE,
@@ -122,7 +128,10 @@ export class LineService {
     }
 
     getGreenToRed(value, max) {
-        value = value / max;
+        if (max) {
+            value = value / max;
+        }
+
         const hue = ((1 - value) * 120).toString(10);
         const color = ['hsl(', hue, ',100%,50%)'].join('');
         return color;
@@ -159,19 +168,25 @@ export class LineService {
                 this.markersArray.map(marker => {
                     console.log(marker);
 
-                    marker.color = this.getGreenToRed(marker.operational_age, this.markersArray.length);
+                    marker.color = this.getGreenToRed(marker.operational_age, this.operational_lMax);
                 });
+
+                this.createLegend(this.CONTINUES_TYPE_MAP);
+
+
                 break;
             case 'failure_hazrad':
                 this.markersArray.map(marker => {
-                    marker.color = this.getGreenToRed(marker.failure_hazard, this.markersArray.length);
+                    marker.color = this.getGreenToRed(marker.failure_hazard, null);
                 });
+                this.createLegend(this.CONTINUES_TYPE_MAP);
                 break;
         }
 
     }
 
     getMaxValueOfType() {
+
         this.operational_lMax = 0;
         this.hazard_Max = 0;
         for (let i = 0; i < this.markersArray.length; i++) {
